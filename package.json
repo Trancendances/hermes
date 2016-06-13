@@ -1,0 +1,20 @@
+{
+  "name": "Hermes",
+  "author": {
+    "name" : "Brendan Abolivier",
+    "email" : "brendan@trancendances.fr",
+    "url" : "https://www.trancendances.fr/"
+  },
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "americano": "0.4.5",
+    "nodemailer": "2.4.2"
+  },
+  "license": {
+    "type": "AGPL-3.0",
+    "url": "https://www.gnu.org/licenses/agpl-3.0.en.html"
+  }
+}
