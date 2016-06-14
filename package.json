@@ -1,17 +1,18 @@
 {
   "name": "Hermes",
+  "version": "0.0.1",
   "author": {
     "name" : "Brendan Abolivier",
     "email" : "brendan@trancendances.fr",
     "url" : "https://www.trancendances.fr/"
   },
-  "version": "0.0.1",
   "scripts": {
-    "start": "node server.js"
+    "start": "node --use_strict server.js"
   },
   "dependencies": {
     "americano": "0.4.5",
-    "nodemailer": "2.4.2"
+    "nodemailer": "2.4.2",
+    "nano-markdown": "1.2.0"
   },
   "license": {
     "type": "AGPL-3.0",
