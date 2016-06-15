@@ -2,24 +2,35 @@
 <html>
     <head>
         <title>Hermes</title>
+        <!-- VENDOR -->
         <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
         <script src="vendor/js/jquery-3.0.0.min.js"></script>
         <script src="vendor/js/bootstrap.min.js"></script>
+        <!-- LIB -->
+        <script src="lib/js/index.js"></script>
     </head>
     <body>
-        <textarea id="content"></textarea>
-
-        <script>
-            function sendMail() {
-                $.ajax({
-                  method: "POST",
-                  url: "newsletter/send",
-                  data: {
-                    subject: "Hello world",
-                    content: $("#content").val()
-                  }
-                });
-            }
-        </script>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <span class="navbar-brand">Hermes</span>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/">Send a mail</a></li>
+                        <li><a href="settings">Settings</a></li>
+                        <li><a href="about">About</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            <h3><label for="subject">Subject</label></h3>
+            <input type="text" class="form-control" id="subject" placeholder="Subject">
+            <h3><label for="content">Body</label></h3>
+            <textarea id="content" class="form-control" rows="20" placeholder="Body"></textarea>
+            <br />
+            <input type="submit" class="btn btn-primary form-control" value="Send mail" id="sendmail" />
+        </div>
     </body>
 </html>

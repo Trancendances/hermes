@@ -13,7 +13,7 @@ module.exports.send = function (req, res, next) {
     let newsletter = new Newsletter(req.body.subject);
     
     // Setting stuff (temporary for testing)
-    newsletter.setRecipient([
+    newsletter.setRecipients([
         "brendan.abolivier@isen-bretagne.fr",
         "brendan@abolivier.fr"
     ]);
