@@ -38,3 +38,6 @@ jspm_packages
 
 # Credentials
 mailSettings.json
+
+# Test files
+test*

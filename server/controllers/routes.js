@@ -1,10 +1,6 @@
-var newsletter  = require('./newsletter'),
-    index       = require('./index');
+var newsletter  = require('./newsletter');
 
 module.exports = {
-    '': {
-        get: index.index
-    },
     'newsletter/send': {
         post: newsletter.send
     }
