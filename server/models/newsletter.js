@@ -11,45 +11,43 @@ function mergeFields(dst, src) {
     return dst;
 }
 
-var newsletter = {
-    recipients: [], // Mandatory
-    html: "", // Mandatory
-    subject: "",
+/***************** Newletter class *******************/
+class Newsletter {
+    constructor(subject) {
+        this.subject    = subject;
+        this.recipients = []; // Mandatory
+        this.html       = ""; // Mandatory
+    }
     
-    setRecipients: function(recipients) {
+    setRecipients (recipients) {
         this.recipients = recipients;
-    },
+    }
     
-    addRecipient: function(newRecipient) {
+    addRecipient (newRecipient) {
         if(typeof newRecipient === 'string') {
             this.recipients.push(newRecipient);
         } else {
             throw 'Not a string';
         }
-    },
+    }
     
-    setContent: function(content) {
+    setContent (content) {
         if(typeof content === 'string') {
             this.html = content;
         } else {
             throw 'Not a string';
         }
-    },
+    }
     
-    setContentFromFile: function(path) {
+    setContentFromFile (path) {
         if(typeof path === 'string') {
             this.html = { path: path };
         } else {
             throw 'Not a string';
         }
-    },
+    }
     
-    setSubject: function(subject) {
-        this.subject = subject;
-    },
-    
-    
-    prepareMail: function() {
+    prepareMail () {
         // Check if recipients are set
         if(!this.recipients.length) {
             throw 'No recipient'
@@ -63,12 +61,12 @@ var newsletter = {
             subject: this.subject ? this.subject : "Newsletter",
             html: this.html
         });
-    },
+    }
     
     // next(err, infos): Callback sent for each recipient being the infos 
     //                   returned by nodemailer
     // done(): To call once every mail have been sent
-    sendToRecipients: function(next, done) {
+    sendToRecipients (next, done) {
         let options = this.prepareMail();
         // Loop, to send the mail to each recipient, one by one
         let mails = this.recipients.map((recipient) => {
@@ -85,8 +83,8 @@ var newsletter = {
                 });
             });
         });
-        Promise.all(mails).then(() => done());
-    }
-};
+        Promise.all(mails).then(done);
+    }    
+}
 
-module.exports = newsletter;
+module.exports = Newsletter;

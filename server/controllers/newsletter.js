@@ -10,18 +10,23 @@ var status = {
 }
 
 module.exports.send = function (req, res, next) {
+    let newsletter = new Newsletter(req.body.subject);
+    
     // Setting stuff (temporary for testing)
-    Newsletter.addRecipient("brendan.abolivier@isen-bretagne.fr");
-    Newsletter.addRecipient("brendan@abolivier.fr");
-    Newsletter.setSubject(req.body.subject);
-    Newsletter.setContent(nmd(req.body.content));
+    newsletter.setRecipient([
+        "brendan.abolivier@isen-bretagne.fr",
+        "brendan@abolivier.fr"
+    ]);
+
+    // Translate from markdown
+    newsletter.setContent(nmd(req.body.content));
     
     // Setting sending up
     status.sending = true;
     res.status(202).send();
     
     // Send dem mails
-    Newsletter.sendToRecipients((err, recipient) => {
+    newsletter.sendToRecipients((err, recipient) => {
         if(err) {
             status.fail.push(recipient);
         } else {
