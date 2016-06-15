@@ -1,15 +1,25 @@
-<textarea id="content"></textarea>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hermes</title>
+        <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
+        <script src="vendor/js/jquery-3.0.0.min.js"></script>
+        <script src="vendor/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <textarea id="content"></textarea>
 
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script>
-    function sendMail() {
-        $.ajax({
-          method: "POST",
-          url: "newsletter/send",
-          data: {
-            subject: "Hello world",
-            content: $("#content").val()
-          }
-        });
-    }
-</script>
+        <script>
+            function sendMail() {
+                $.ajax({
+                  method: "POST",
+                  url: "newsletter/send",
+                  data: {
+                    subject: "Hello world",
+                    content: $("#content").val()
+                  }
+                });
+            }
+        </script>
+    </body>
+</html>
