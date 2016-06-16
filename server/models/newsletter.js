@@ -1,13 +1,27 @@
 var fs          = require('fs'),
     nodemailer  = require('nodemailer'),
-    settings    = require('../../mailSettings');
+    settings    = require('../../settings');
 
-var transporter = nodemailer.createTransport(settings.transporterConfig);
+var transporter = nodemailer.createTransport(settings.transporter);
 
-function mergeFields(dst, src) {
+function mergeFields (dst, src) {
     for (var property in src) {
         dst[property] = src[property];
     }
+    return dst;
+}
+
+function standardise (settings) {
+    let dst = {};
+    dst.headers = {};
+    
+    if(settings.from)
+        dst.from = settings.from;
+    if(settings.userAgent)
+        dst.headers["User-Agent"] = settings.userAgent;
+    if(settings.replyTo)
+        dst.headers["Reply-To"] = settings.replyTo;
+    
     return dst;
 }
 
@@ -57,7 +71,7 @@ class Newsletter {
             throw 'No content'
         }
         // Prepare mail to be sent
-        return mergeFields(settings.mailSettings, {
+        return mergeFields(standardise(settings.mail), {
             subject: this.subject ? this.subject : "Newsletter",
             html: this.html
         });

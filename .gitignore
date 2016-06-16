@@ -37,7 +37,7 @@ jspm_packages
 .node_repl_history
 
 # Credentials
-mailSettings.json
+settings.json
 
 # Test files
 test*
