@@ -7,15 +7,15 @@ var log = printit({
     date: true
 });
 
-var mysqlConnection = mysql.createConnection(settings.db);
+var mysqlConnection = mysql.createConnection(settings.db.mysql);
 
 mysqlConnection.connect((err) => {
-    if err {
+    if(err) {
         log.error(err.name);
         console.error(err.stack);
         process.exit();
     }
     
-    log.info("Connected to database with ID " + connection.threadId);
+    log.info("Connected to database with ID " + mysqlConnection.threadId);
 });
 
