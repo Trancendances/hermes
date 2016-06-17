@@ -16,7 +16,7 @@ class MysqlConnection extends Connection {
                 process.exit();
             }
             let id = this.connection.threadId;
-            this.log.info("Connected to database with ID " + id);
+            this.log.info("Connected to MySQL database.");
         });
     }
 }
