@@ -3,9 +3,12 @@ var newsletter  = require('./newsletter'),
 
 module.exports = {
     'newsletter/send': {
-        post: newsletter.send
+        post:   newsletter.send
     },
     'lists': {
-        get: lists.getLists
+        get:    lists.getLists,
+        post:   lists.addList,
+        put:    lists.updateList,
+        delete: lists.removeList
     }
 };

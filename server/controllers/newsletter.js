@@ -1,15 +1,33 @@
 var nmd         = require('nano-markdown'),
+    printit     = require('printit'),
     Newsletter  = require('../models/newsletter');
 
-var status = {
-    sending: false,
-    sent: 0,
-    recipients: 0,
-    fail: [],
-    success: []
+var log = printit({
+    prefix: "newsletters",
+    date: true
+});
+
+var status = {};
+
+function resetStatus() {
+    status = {
+        sending: false,
+        sent: 0,
+        recipients: 0,
+        fail: [],
+        success: []
+    }
 }
 
+resetStatus();
+
 module.exports.send = function (req, res, next) {
+    if(!req.body.subject || !req.body.content) {
+        let message = "Subject or content missing";
+        res.send(400).send({err: message});
+        return log.error(message);
+    }
+    
     let newsletter = new Newsletter(req.body.subject);
     
     // Setting stuff (temporary for testing)
@@ -34,7 +52,7 @@ module.exports.send = function (req, res, next) {
         }
         status.sent++;
     }, () => {
-        status.sending = false;
+        resetStatus();
     });
 }
 
