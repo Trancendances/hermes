@@ -1,21 +1,12 @@
-var mysql       = require('mysql'),
-    printit     = require('printit'),
+var Connection  = require('../lib/db/factory'),
     settings    = require('../../settings');
     
-var log = printit({
-    prefix: "database",
-    date: true
-});
+var db = Connection.createConnection(settings.db);
 
-var mysqlConnection = mysql.createConnection(settings.db.mysql);
+db.connect();
 
-mysqlConnection.connect((err) => {
-    if(err) {
-        log.error(err.name);
-        console.error(err.stack);
-        process.exit();
-    }
+class List {
     
-    log.info("Connected to database with ID " + mysqlConnection.threadId);
-});
+}
 
+module.exports = List;
