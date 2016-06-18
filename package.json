@@ -19,7 +19,8 @@
     "americano": "0.4.5",
     "mysql": "2.11.1",
     "nano-markdown": "1.2.0",
-    "nodemailer": "2.4.2"
+    "nodemailer": "2.4.2",
+    "printit": "0.1.20"
   },
   "makeDependencies": {
     "chai": "3.5.0",
