@@ -32,7 +32,6 @@ describe('Lists', () => {
         });
     });
     
-    
     it('Updating the name of a list', (done) => {
         let data = {name: NEW_LIST_NAME};
         client.put('/lists/' + LIST_NAME, data, (err, res) => {
