@@ -7,7 +7,9 @@ module.exports = {
     },
     'lists': {
         get:    lists.getLists,
-        post:   lists.addList,
+        post:   lists.addList
+    },
+    'lists/:name': {
         put:    lists.updateList,
         delete: lists.removeList
     }

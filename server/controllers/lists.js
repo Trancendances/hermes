@@ -7,24 +7,19 @@ var log = printit({
 });
 
 // The process of adding and removing a list are almost the same. Only
-// the static method we call changes.
+// the static method we call, and the list's name location changes.
 // req, res: Request and response, same as Express's
 // feature: 'addition' or 'deletion'. Used to select the method to use
 function alterLists(req, res, feature) {
-    // Checking if the list's name has been filled
-    if(!req.body.name) {
-        let message = "Name missing";
-        res.status(400).send({err: message});
-        return log.error(message);
-    }
-    
-    // Selecting the method
-    let alterFunction;
+    // Selecting the method and the name's location
+    let alterFunction, name;
     switch(feature) {
         case 'addition':
             alterFunction = Lists.addList;
+            name = req.body.name;
             break;
         case 'deletion':
+            name = req.params.name;
             alterFunction = Lists.removeList;
             break;
         default:
@@ -32,8 +27,15 @@ function alterLists(req, res, feature) {
             break;
     }
     
+    // Checking if the list's name has been filled
+    if(!name) {
+        let message = "Name missing";
+        res.status(400).send({err: message});
+        return log.error(message);
+    }
+    
     // Using the method
-    alterFunction(req.body.name, (err) => {
+    alterFunction(name, (err) => {
         if(err) {
             log.error("Error: " + err.code);
             console.error(err.stack);
@@ -62,13 +64,13 @@ module.exports.addList = function (req, res, next) {
 // the used static method, unlike the addition or deletion. This one
 // gets its own function, but the process is very similar.
 module.exports.updateList = function (req, res, next) {
-    if(!req.body.oldName || !req.body.newName) {
-        let message = "Names missing";
+    if(!req.body.name) {
+        let message = "New name missing";
         res.send(400).send({err: message});
         return log.error(message);
     }
     
-    Lists.updateList(req.body.newName, req.body.oldName, (err) => {
+    Lists.updateList(req.body.name, req.params.name, (err) => {
         if(err) {
             log.error("Error: " + err.code);
             console.error(err.stack);
