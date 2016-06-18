@@ -11,3 +11,4 @@ before_install:
   - mysql -e "create database IF NOT EXISTS test;" -uroot
   - mysql -uroot test < rsc/mysql-setup.sql
   - mv settings.travis.json settings.json
+  - npm install -g mocha
