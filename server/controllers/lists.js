@@ -14,7 +14,7 @@ function alterLists(req, res, feature) {
     // Checking if the list's name has been filled
     if(!req.body.name) {
         let message = "Name missing";
-        res.send(400).send({err: message});
+        res.status(400).send({err: message});
         return log.error(message);
     }
     
