@@ -4,9 +4,9 @@ node_js:
   - 5
   - 6
  
- services:
+services:
   - mysql
-  
+
 before_install:
   - mysql -e "create database IF NOT EXISTS test;" -uroot
   - mysql -uroot test < rsc/mysql-setup.sql
