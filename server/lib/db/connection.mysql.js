@@ -10,6 +10,7 @@ class MysqlConnection extends Connection {
         super(settings, prefix);
     }
     
+    
     connect() {
         // Openning MySQL connection
         this.connection = mysql.createConnection(this.settings);
@@ -23,6 +24,7 @@ class MysqlConnection extends Connection {
             this.log.info("Connected to MySQL database.");
         });
     }
+    
     
     get(table, options, next) {
         let query = 'SELECT * FROM ' + table;
@@ -45,12 +47,14 @@ class MysqlConnection extends Connection {
         this.connection.query(query, next);
     }
     
+    
     add(table, data, next) {
         let query = 'INSERT INTO ' + table + ' SET ?'
         
         // Gotta love a well-made module <3
         this.connection.query(query, data, next);
     }
+    
     
     update(table, newData, oldData, next) {
         let query = 'UPDATE ' + table + ' SET ? WHERE ';
@@ -67,6 +71,7 @@ class MysqlConnection extends Connection {
         this.connection.query(query, newData, next);
     }
     
+    
     delete(table, conditions, next) {
         let query = 'DELETE FROM ' + table + ' WHERE '
         
@@ -82,5 +87,6 @@ class MysqlConnection extends Connection {
         this.connection.query(query, next);
     }
 }
+
 
 module.exports = MysqlConnection;

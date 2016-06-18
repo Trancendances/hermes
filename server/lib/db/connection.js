@@ -28,7 +28,6 @@ class Connection {
     get(dataType, options, next) {}
     
     
-    
     // Add data to the database
     // dataType: Type of data
     // data: Data to add symbolised as a {field: value} map
