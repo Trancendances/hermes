@@ -1,6 +1,6 @@
 # Hermes [![](https://travis-ci.org/Trancendances/hermes.svg?branch=master)](https://travis-ci.org/Trancendances/hermes)
 
-Hermes is a bulk e-mail sender. It allows you to manage mailing lists and subscribers, and send them e-mail based on HTML template and
+Hermes is a bulk e-mail sender. It allows you to manage mailing lists and subscribers, and send them e-mails based on HTML template and
 markdown content, in a self-hosted and respectful way. No more big superservice adding its own tracker to your emails.
 
 :warning: **This project is still under heavy development and is not ready for production yet.**
