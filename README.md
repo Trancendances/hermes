@@ -18,6 +18,58 @@ cd hermes
 npm install
 ```
 
+## Configuring
+
+To configure Hermes with your own settings, you must put them in a JSON file at the root of this directory. This file includes three parts: One for the transporter's (SMTP) configuration, another for the e-mail sending settings, and a last one for the database. The final JSON file should look like this.
+
+```json
+{
+    "transporter": {
+        "pool": true,
+        "host": "mail.example.tld",
+        "port": 587,
+        "requireTLS": true,
+        "auth": {
+            "user": "noreply@example.tld",
+            "pass": "somepassword"
+        }
+    },
+    "mail": {
+        "from": "My awesome service <noreply@example.tld>",
+        "userAgent": "Hermes (Trancendances) based on nodemailer",
+        "replyTo": "contact@example.tld"
+    },
+    "db": {
+        "mysql": {
+            "host"     : "localhost",
+            "user"     : "root",
+            "password" : "anotherpassword",
+            "database" : "hermes"
+        }
+    }
+    
+}
+```
+
+* The first part (`transporter`) can include any setting allowed by [nodemailer](https://github.com/nodemailer/nodemailer#set-up-smtp).
+* The `mail` part configures static parts for all the e-mails that will be sent from Hermes. Right now, it only accepts three different fields: `from` (sender's address), `userAgent` (sender's user agent) and `replyTo` (the user to reply to the email, in case it differs from the sender's address).
+* `db` contains all your database settings. It contains a map which key defines the database engine you use, among all the drivers existing in the application. In this example, we use MySQL, for which we use four fields: `host`, `user`, `password` and `database`.
+
+### Available database drivers
+
+Here is a list of all the database engines currently supported in Hermes:
+
+**MySQL**
+```json
+"mysql": {
+    "host"     : "localhost",
+    "user"     : "root",
+    "password" : "anotherpassword",
+    "database" : "hermes"
+}
+```
+
+
 ## Starting
 
 To start Hermes, run 
@@ -44,6 +96,7 @@ If you like this project and want to help, there's many way to do it.
 - Suggest new features in an [issue](https://github.com/Trancendances/hermes/issues)
 - Report every bug or inconvenience you encountered during this software in the [issues](https://github.com/Trancendances/hermes/issues)
 - Pick up an [issue](https://github.com/Trancendances/hermes/issues) and fix it by submitting a [pull request](https://github.com/Trancendances/hermes/pulls)
+- Implement a new database driver
 - Start implementing a new feature you'd like to use in the software*
 
 \* Before you start implementing anything, please make sure to create an [issue](https://github.com/Trancendances/hermes/issues) about it if one hasn't been created yet.
