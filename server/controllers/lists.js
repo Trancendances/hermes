@@ -6,6 +6,17 @@ var log = printit({
     date: true
 });
 
+
+// Log an error and sends it in the HTTP response.
+// error: An Error object representing the error
+// res: Express's response object
+function logError(error, res) {
+    res.status(500).send({err: error.message});
+    log.error(error.message);
+    console.log(error.stack);
+}
+
+
 // The process of adding and removing a list are almost the same. Only
 // the static method we call, and the list's name location changes.
 // req, res: Request and response, same as Express's
@@ -29,17 +40,13 @@ function alterLists(req, res, feature) {
     
     // Checking if the list's name has been filled
     if(!name) {
-        let message = "Name missing";
-        res.status(400).send({err: message});
-        return log.error(message);
+        return logError(new Error('Name missing.'), res);
     }
     
     // Using the method
     alterFunction(name, (err) => {
         if(err) {
-            log.error("Error: " + err.code);
-            console.error(err.stack);
-            return res.status(500).send(err);
+            return logError(err);
         }
         res.sendStatus(200)
     });
@@ -49,6 +56,9 @@ function alterLists(req, res, feature) {
 // Returns an array containing all the lists registered in the database
 module.exports.getLists = function (req, res, next) {
     Lists.getLists((err, lists) => {
+        if(err) {
+            return logError(err, res);
+        }
         res.status(200).send(lists);
     });
 }
@@ -65,16 +75,12 @@ module.exports.addList = function (req, res, next) {
 // gets its own function, but the process is very similar.
 module.exports.updateList = function (req, res, next) {
     if(!req.body.name) {
-        let message = "New name missing";
-        res.send(400).send({err: message});
-        return log.error(message);
+        return logError(new Error('Names missing.'));
     }
     
     Lists.updateList(req.body.name, req.params.name, (err) => {
         if(err) {
-            log.error("Error: " + err.code);
-            console.error(err.stack);
-            return res.status(500).send(err);
+            return logError(err);
         }
         res.sendStatus(200)        
     });
