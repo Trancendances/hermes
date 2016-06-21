@@ -11,6 +11,10 @@ var log = printit({
 // error: An Error object representing the error
 // res: Express's response object
 function logError(error, res) {
+    // If not an error object, make it one
+    if(typeof error === "string") {
+        error = new Error(error);
+    }
     res.status(500).send({err: error.message});
     log.error(error.message);
     console.log(error.stack);
@@ -40,7 +44,7 @@ function alterLists(req, res, feature) {
     
     // Checking if the list's name has been filled
     if(!name) {
-        return logError(new Error('Name missing.'), res);
+        return logError('Name missing.', res);
     }
     
     // Using the method
@@ -75,7 +79,7 @@ module.exports.addList = function (req, res, next) {
 // gets its own function, but the process is very similar.
 module.exports.updateList = function (req, res, next) {
     if(!req.body.name) {
-        return logError(new Error('Names missing.'));
+        return logError('Names missing.', res);
     }
     
     Lists.updateList(req.body.name, req.params.name, (err) => {
