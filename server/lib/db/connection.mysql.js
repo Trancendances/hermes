@@ -12,17 +12,20 @@ class MysqlConnection extends Connection {
     
     
     connect() {
-        // Openning MySQL connection
-        this.connection = mysql.createConnection(this.settings);
-        this.connection.connect((err) => {
-            if(err) {
-                this.log.error("Error: " + err.code);
-                console.error(err.stack);
-                process.exit();
-            }
-            // Logging
-            this.log.info("Connected to MySQL database.");
-        });
+        // Don't connect twice
+        if(!this.connection) {
+            // Openning MySQL connection
+            this.connection = mysql.createConnection(this.settings);
+            this.connection.connect((err) => {
+                if(err) {
+                    this.log.error("Error: " + err.code);
+                    console.error(err.stack);
+                    process.exit();
+                }
+                // Logging
+                this.log.info("Connected to MySQL database.");
+            });
+        }
     }
     
     
