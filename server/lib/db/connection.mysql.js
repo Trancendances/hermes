@@ -64,7 +64,7 @@ class MysqlConnection extends Connection {
         
         for(let field in oldData) {
             query += field + '=';
-            query += this.connection.escape(oldData[field]) + ' AND';
+            query += this.connection.escape(oldData[field]) + ' AND ';
         }
         
         // Remove the last "AND"
@@ -80,7 +80,7 @@ class MysqlConnection extends Connection {
         
         for(let field in conditions) {
             query += field + '=';
-            query += this.connection.escape(conditions[field]) + ' AND';
+            query += this.connection.escape(conditions[field]) + ' AND ';
         }
         
         // Remove the last "AND"

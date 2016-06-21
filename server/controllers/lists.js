@@ -17,7 +17,8 @@ function logError(error, res) {
     }
     res.status(500).send({err: error.message});
     log.error(error.message);
-    console.log(error.stack);
+    if(process.env.NODE_ENV !== 'test')
+        console.log(error.stack);
 }
 
 
@@ -64,6 +65,21 @@ module.exports.getLists = function (req, res, next) {
             return logError(err, res);
         }
         res.status(200).send(lists);
+    });
+}
+
+
+// Returns an array containing the subscribers in a list
+module.exports.getList = function (req, res, next) {
+    if(!req.params.name) {
+        return logError('Name missing.', res);
+    }
+
+    Lists.getList(req.params.name, (err, subscribers) => {
+        if(err) {
+            return logError(err, res);
+        }
+        res.status(200).send(subscribers);
     });
 }
 

@@ -32,6 +32,13 @@ describe('Lists', () => {
         });
     });
     
+    it('Getting subscribers from a list', (done) => {
+        client.get('/lists/' + LIST_NAME, (err, res, body) => {
+            body.length.should.equal(0);
+            done();
+        });
+    });
+    
     it('Updating the name of a list', (done) => {
         let data = {name: NEW_LIST_NAME};
         client.put('/lists/' + LIST_NAME, data, (err, res) => {

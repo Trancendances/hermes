@@ -1,4 +1,5 @@
 var List    = require('../server/models/lists'),
+    Subs    = require('../server/models/subscribers'),
     Client  = require('request-json').JsonClient;
 
 module.exports.removeAllLists = function(done) {
@@ -12,6 +13,7 @@ module.exports.removeAllLists = function(done) {
         Promise.all(removal).then(() => { done() });
     });
 }
+
 
 module.exports.getClient = function() {
     let port = process.env.PORT || 1708;
