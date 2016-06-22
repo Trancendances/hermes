@@ -1,5 +1,5 @@
 var should      = require('chai').Should(),
-    startServer = require('../server').start,
+    server      = require('../server'),
     helpers     = require('./helpers');
 
 var client = helpers.getClient();
@@ -11,15 +11,19 @@ var LIST_NAME       = 'test list',
 
 describe('Subscribers', () => {
     before((done) => {
-        //startServer();
-        // Removing all lists will also remove their subscribers
-        helpers.removeAllLists(() => {
-            // Adding a fake list. Test on this route is in a separate file
-            client.post('/lists', {name: LIST_NAME}, (err, res) => {
-                done();
+        server.start(() => {
+            // Removing all lists will also remove their subscribers
+            helpers.removeAllLists(() => {
+                // Adding a fake list. Test on this route is in a separate file
+                client.post('/lists', {name: LIST_NAME}, (err, res) => {
+                    done();
+                });
             });
-        });
-        
+        });        
+    });
+    
+    after((done) => {
+        server.stop(() => { done(); });
     });
     
     it('Getting all subscribers', (done) => {

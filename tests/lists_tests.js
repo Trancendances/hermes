@@ -1,5 +1,5 @@
 var should      = require('chai').Should(),
-    startServer = require('../server').start,
+    server      = require('../server'),
     helpers     = require('./helpers');
 
 var client = helpers.getClient();
@@ -9,8 +9,13 @@ var LIST_NAME       = 'test list',
 
 describe('Lists', () => {
     before((done) => {
-        startServer();
-        helpers.removeAllLists(done);
+        server.start(() => {
+            helpers.removeAllLists(done);
+        });
+    });
+    
+    after((done) => {
+        server.stop(() => { done(); });
     });
     
     it('Getting lists', (done) => {
