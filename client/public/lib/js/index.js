@@ -14,7 +14,7 @@ function sendMail() {
         error: () => {
             $("#sendmail").removeClass("btn-info");
             $("#sendmail").addClass("btn-danger");
-            $("#sendmail").val("An error occured, no mail has been sent.");
+            $("#sendmail").val("An error occured, sending aborted.");
         }
     });
 }
