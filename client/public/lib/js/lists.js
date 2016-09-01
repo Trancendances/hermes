@@ -22,47 +22,6 @@ function getLists() {
     });
 }
 
-function removeList(name, row) {
-    $.ajax({
-        method: "DELETE",
-        url: "lists/" + name,
-        success: () => {
-            row.remove();
-            listsNumber--;
-            if(!listsNumber) {
-                let row = "<tr><td>No list found</td><td></td></tr>";
-                $("#lists tbody").append(row);
-            }
-        }
-        // TODO: error callback
-    });
-}
-
-function addListeners() {
-    $(".fa-times").on("click", (e) => {
-        let row = e.target.parentNode.parentNode;
-        let name = row.children[0].innerHTML;
-        removeList(name, row);
-    });
-}
-
-function genFaHtml(operations) {
-    let fa = '';
-    
-    operations.forEach((operation) => {
-        fa += '<i class="fa fa-' + operation + '" style="cursor:pointer"></i>&nbsp;'
-    });
-    return fa;
-}
-
-function createRow(name) {
-    let operations = [
-        "pencil", // Edit
-        "times"   // Delete
-    ];
-    let row = "<tr><td>" + name + "</td><td>" + genFaHtml(operations) + "</tr>";
-    $("#lists tbody").append(row);
-}
 
 function createList() {
     $.ajax({
@@ -88,6 +47,54 @@ function createList() {
         }
     });
 }
+
+
+function removeList(name, row) {
+    $.ajax({
+        method: "DELETE",
+        url: "lists/" + name,
+        success: () => {
+            row.remove();
+            listsNumber--;
+            if(!listsNumber) {
+                let row = "<tr><td>No list found</td><td></td></tr>";
+                $("#lists tbody").append(row);
+            }
+        }
+        // TODO: error callback
+    });
+}
+
+
+function addListeners() {
+    $(".fa-times").on("click", (e) => {
+        let row = e.target.parentNode.parentNode;
+        let name = row.children[0].innerHTML;
+        removeList(name, row);
+    });
+}
+
+
+function genFaHtml(operations) {
+    let fa = '';
+    
+    operations.forEach((operation) => {
+        fa += '<i class="fa fa-' + operation + '" style="cursor:pointer"></i>&nbsp;'
+    });
+    return fa;
+}
+
+
+function createRow(name) {
+    let operations = [
+        "pencil", // Edit
+        "times"   // Delete
+    ];
+    let row = "<tr><td>" + name + "</td><td>" + genFaHtml(operations) + "</tr>";
+    $("#lists tbody").append(row);
+}
+
+
 
 $(document).ready(() => {
     getLists();
