@@ -116,7 +116,7 @@ least necessary) and the use of free software in accordance with its philosophy.
 
 ## Contact us
 
-There are many ways to get in touch, whether it is by [e-mail](oss@trancendances.fr), [Twitter](https://twitter.com/Trancendances) or [Facebook](https://facebook.com/Trancendances), or even in this repository's [issues](https://github.com/Trancendances/hermes/issues).
+There are many ways to get in touch, whether it is by [e-mail](mailto:oss@trancendances.fr), [Twitter](https://twitter.com/Trancendances) or [Facebook](https://facebook.com/Trancendances), or even in this repository's [issues](https://github.com/Trancendances/hermes/issues).
 
 Additionally, you can contact Hermes's maintainer at <brendan@trancendances.fr>.
 
