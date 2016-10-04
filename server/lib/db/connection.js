@@ -28,6 +28,13 @@ class Connection {
     get(dataType, options, next) {}
     
     
+    // Extract data from the database
+    // dataType: Type of data
+    // options: Options to select the data (limit, conditions...)
+    // next(err, data): Callback function
+    count(dataType, next) {}
+    
+    
     // Add data to the database
     // dataType: Type of data
     // data: Data to add symbolised as a {field: value} map

@@ -40,10 +40,13 @@ function createList() {
             createRow($("#name").val());
             listsNumber++;
         },
-        error: () => {
+        error: (xhr) => {
             $("#createlist").removeClass("btn-info");
             $("#createlist").addClass("btn-danger");
-            $("#createlist").val("An error occured, creation aborted.");
+            let val = "An error occured (";
+            val += xhr.responseJSON.err;
+            val += "), creation aborted."
+            $("#createlist").val(val);
         }
     });
 }

@@ -1,6 +1,7 @@
 var mysql       = require('mysql'),
     Connection  = require('./connection');
 
+
 // MySQL driver, implementation of the Connection abstract class
 // Methods are described in the said abstract class. Here, dataTypes
 // are MySQL tables.
@@ -29,25 +30,50 @@ class MysqlConnection extends Connection {
     }
     
     
+    // Returns SQL formatted condition part of the query
+    // conditions: The conditions object
+    // returns: String containing the "WHERE" part of the query
+    genSQLCondition(conditions) {
+        let str = ''
+        
+        str += ' WHERE ';
+        conditions.forEach((condition) => {
+            str += condition.lo + ' ';
+            str += condition.cmp + ' ';
+            str += this.connection.escape(condition.ro);
+            str += ' AND ';
+        });
+        
+        // Remove the last "AND"
+        let length = str.length;
+        str = str.substr(0, length-4);
+        
+        return str;
+    }
+    
+    
     get(table, options, next) {
         let query = 'SELECT * FROM ' + table;
         
         if(options.conditions) {
-            query += ' WHERE ';
-            for(let condition in options.conditions) {
-                query += condition.lo + ' ';
-                query += condition.cmp + ' ';
-                query += this.connection.escape(condition.ro);
-                query += ' AND ';
-            }
-            
-            // Remove the last "AND"
-            let length = query.length;
-            query = query.substr(0, length-4);
+            query += this.genSQLCondition(options.conditions);
         }
         // Execute query and pass error, if there's one, to the callback,
         // along the query result
         this.connection.query(query, next);
+    }
+    
+    
+    count(table, options, next) {
+        let query = 'SELECT COUNT(*) FROM ' + table;
+        
+        if(options.conditions) {
+            query += this.genSQLCondition(options.conditions);
+        }
+        
+        this.connection.query(query, (err, data) => {
+            next(err, data[0]['COUNT(*)']);
+        });
     }
     
     

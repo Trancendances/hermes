@@ -51,9 +51,9 @@ function alterLists(req, res, feature) {
     // Using the method
     alterFunction(name, (err) => {
         if(err) {
-            return logError(err);
+            return logError(err, res);
         }
-        res.sendStatus(200)
+        res.sendStatus(200);
     });
 }
 

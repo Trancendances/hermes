@@ -32,9 +32,11 @@ class List {
     // next(err, data): Callback function
     static getList(name, next) {
         db.get('subscribers', {
-            lo: 'list',
-            cmp: '=',
-            ro: name
+            conditions: [{
+                lo: 'list',
+                cmp: '=',
+                ro: name
+            }]
         }, (err, data) => {
             if(err) {
                 return next(err);
@@ -48,8 +50,23 @@ class List {
     // name: The new mailing list's name
     // next(err): Callback function
     static addList(name, next) {
-        db.add(dataType, { name: name }, (err) => {
-            next(err);
+        db.count(dataType, {
+            conditions: [{
+                lo: 'name',
+                cmp: '=',
+                ro: name
+            }]
+        }, (err, data) => {
+            if(err) {
+                return next(err);
+            }
+            if(!data) {
+                db.add(dataType, { name: name }, (err) => {
+                    next(err);
+                });    
+            } else {
+                next(new Error('Database already exists'));
+            }
         });
     }
     
