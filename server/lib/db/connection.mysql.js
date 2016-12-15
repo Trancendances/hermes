@@ -25,7 +25,7 @@ class MysqlConnection extends Connection {
                 }
                 // Logging
                 this.log.info('Connected to MySQL database.');
-            });
+            }.bind(this));
         }
     }
     
@@ -42,7 +42,7 @@ class MysqlConnection extends Connection {
             str += condition.cmp + ' ';
             str += this.connection.escape(condition.ro);
             str += ' AND ';
-        });
+        }.bind(this));
         
         // Remove the last 'AND'
         let length = str.length;
