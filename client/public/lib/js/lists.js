@@ -82,7 +82,7 @@ function genFaHtml(operations) {
     let fa = '';
     
     operations.forEach((operation) => {
-        fa += '<i class='fa fa-' + operation + '' style='cursor:pointer'></i>&nbsp;'
+        fa += '<i class="fa fa-" + operation + '' style="cursor:pointer"></i>&nbsp;'
     });
     return fa;
 }
