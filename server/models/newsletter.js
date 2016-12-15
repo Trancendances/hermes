@@ -122,12 +122,12 @@ class Newsletter {
     sendToRecipients (next, done) {
         let options = this.prepareMail();
         // Loop, to send the mail to each recipient, one by one
-        let mails = this.recipients.map((recipient) => {
-            return new Promise((sent) => {
+        let mails = this.recipients.map(function(recipient) {
+            return new Promise(function(sent) {
                 // Setting the recipient
                 options.to = recipient;
                 // Sending the mail
-                transporter.sendMail(options, (err, infos) => {
+                transporter.sendMail(options, function(err, infos) {
                     sent();
                     if(err) {
                         return next(err, recipient);

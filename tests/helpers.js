@@ -3,14 +3,14 @@ var List    = require('../server/models/lists'),
     Client  = require('request-json').JsonClient;
 
 module.exports.removeAllLists = function(done) {
-    List.getLists((err, lists) => {
-        let removal = lists.map((list) => {
-            return new Promise((removed) => {
+    List.getLists(function(err, lists) {
+        let removal = lists.map(function(list) {
+            return new Promise(function(removed) {
                 List.removeList(list.name, removed);
             });
         });
         
-        Promise.all(removal).then(() => { done() });
+        Promise.all(removal).then(function() { done() });
     });
 }
 

@@ -17,7 +17,7 @@ class MysqlConnection extends Connection {
         if(!this.connection) {
             // Openning MySQL connection
             this.connection = mysql.createConnection(this.settings);
-            this.connection.connect((err) => {
+            this.connection.connect(function(err) {
                 if(err) {
                     this.log.error('Error: ' + err.code);
                     console.error(err.stack);
@@ -37,7 +37,7 @@ class MysqlConnection extends Connection {
         let str = ''
         
         str += ' WHERE ';
-        conditions.forEach((condition) => {
+        conditions.forEach(function(condition) {
             str += condition.lo + ' ';
             str += condition.cmp + ' ';
             str += this.connection.escape(condition.ro);
@@ -71,7 +71,7 @@ class MysqlConnection extends Connection {
             query += this.genSQLCondition(options.conditions);
         }
         
-        this.connection.query(query, (err, data) => {
+        this.connection.query(query, function(err, data) {
             next(err, data[0]['COUNT(*)']);
         });
     }

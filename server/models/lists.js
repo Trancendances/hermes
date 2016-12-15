@@ -18,7 +18,7 @@ class List {
     // to the controller using the callback
     // next(err, data): Callback function
     static getLists(next) {
-        db.get(dataType, {}, (err, data) => {
+        db.get(dataType, {}, function(err, data) {
             if(err) {
                 return next(err);
             }
@@ -37,7 +37,7 @@ class List {
                 cmp: '=',
                 ro: name
             }]
-        }, (err, data) => {
+        }, function(err, data) {
             if(err) {
                 return next(err);
             }
@@ -56,12 +56,12 @@ class List {
                 cmp: '=',
                 ro: name
             }]
-        }, (err, data) => {
+        }, function(err, data) {
             if(err) {
                 return next(err);
             }
             if(!data) {
-                db.add(dataType, { name: name }, (err) => {
+                db.add(dataType, { name: name }, function(err) {
                     next(err);
                 });    
             } else {
@@ -77,7 +77,7 @@ class List {
     //          identify the list in the database.
     // next(err): Callback function
     static updateList(newName, oldName, next) {
-        db.update(dataType, {name: newName}, {name: oldName}, (err) => {
+        db.update(dataType, {name: newName}, {name: oldName}, function(err) {
             next(err);
         });
     }
@@ -87,7 +87,7 @@ class List {
     // name: Name of the list to be removed from the database
     // next(err): Callback function
     static removeList(name, next) {
-        db.delete(dataType, { name: name }, (err) => {
+        db.delete(dataType, { name: name }, function(err) {
             next(err);
         });
     }

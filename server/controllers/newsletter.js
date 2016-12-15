@@ -61,7 +61,7 @@ module.exports.send = function (req, res, next) {
     res.status(202).send();
     
     // Send dem mails
-    newsletter.sendToRecipients((err, recipient) => {
+    newsletter.sendToRecipients(function(err, recipient) {
         // Each time the email is sent, we update the status map
         if(err) {
             status.fail.push(recipient);
@@ -69,7 +69,7 @@ module.exports.send = function (req, res, next) {
             status.success.push(recipient);
         }
         status.sent++;
-    }, () => {
+    }, function() {
         // Once the sending is done, we change the sending status
         status.sending = false;
     });

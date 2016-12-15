@@ -18,7 +18,7 @@ class Subscribers {
     // to the controller using the callback
     // next(err, data): Callback function
     static getSubscribers(next) {
-        db.get(dataType, {}, (err, data) => {
+        db.get(dataType, {}, function(err, data) {
             if(err) {
                 return next(err);
             }
@@ -31,7 +31,7 @@ class Subscribers {
     // name: The new mailing list's name
     // next(err): Callback function
     static addSubscriber(list, address, next) {
-        db.add(dataType, { list: list, address: address }, (err) => {
+        db.add(dataType, { list: list, address: address }, function(err) {
             next(err);
         });
     }
@@ -48,7 +48,7 @@ class Subscribers {
         }, {
             address: oldAddress,
             list: list
-        }, (err) => {
+        }, function(err) {
             next(err);
         });
     }
@@ -59,7 +59,7 @@ class Subscribers {
     // next(err): Callback function
     // TODO: Remove per-list
     static removeSubscriber(address, next) {
-        db.delete(dataType, { address: address }, (err) => {
+        db.delete(dataType, { address: address }, function(err) {
             next(err);
         });
     }    

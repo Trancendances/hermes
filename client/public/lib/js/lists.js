@@ -5,10 +5,10 @@ function getLists() {
         method: 'GET',
         url: 'lists',
         dataType: 'json',
-        success: (data) => {
+        success: function(data) {
             listsNumber = data.length;
             if(data.length) {
-                data.forEach((list) => {
+                data.forEach(function(list) {
                     createRow(list.name);
                 });
                 addListeners();
@@ -30,7 +30,7 @@ function createList() {
         data: {
             name: $('#name').val()
         },
-        success: () => {
+        success: function() {
             if(!listsNumber) {
                 $('#lists tr')[$('#lists tr').length - 1].remove();
             }
@@ -40,7 +40,7 @@ function createList() {
             createRow($('#name').val());
             listsNumber++;
         },
-        error: (xhr) => {
+        error: function(xhr) {
             $('#createlist').removeClass('btn-info');
             $('#createlist').addClass('btn-danger');
             let val = 'An error occured (';
@@ -56,7 +56,7 @@ function removeList(name, row) {
     $.ajax({
         method: 'DELETE',
         url: 'lists/' + name,
-        success: () => {
+        success: function() {
             row.remove();
             listsNumber--;
             if(!listsNumber) {
@@ -70,7 +70,7 @@ function removeList(name, row) {
 
 
 function addListeners() {
-    $('.fa-times').on('click', (e) => {
+    $('.fa-times').on('click', function(e) {
         let row = e.target.parentNode.parentNode;
         let name = row.children[0].innerHTML;
         removeList(name, row);
@@ -81,8 +81,8 @@ function addListeners() {
 function genFaHtml(operations) {
     let fa = '';
     
-    operations.forEach((operation) => {
-        fa += '<i class="fa fa-" + operation + '' style="cursor:pointer"></i>&nbsp;'
+    operations.forEach(function(operation) {    
+        fa += '<i class="fa fa-' + operation + '" style="cursor:pointer"></i>&nbsp;';
     });
     return fa;
 }
@@ -99,9 +99,9 @@ function createRow(name) {
 
 
 
-$(document).ready(() => {
+$(document).ready(function() {
     getLists();
-    $('#createlist').on('click', () => {
+    $('#createlist').on('click', function() {
         if($('#name').val()) {
             // Changing the button style
             $('#createlist').removeClass('btn-danger');

@@ -25,7 +25,7 @@ function logError(error, res) {
 
 // Returns an array containing all the subscribers registered in the database
 module.exports.getSubscribers = function (req, res, next) {    
-    Subscribers.getSubscribers((err, subscribers) => {
+    Subscribers.getSubscribers(function(err, subscribers) {
         if(err) {
             return logError(err, res);
         }
@@ -45,11 +45,11 @@ module.exports.addSubscriber = function (req, res, next) {
     if(message)
         return logError(message, res)
     
-    return Lists.getLists((err, lists) => {
+    return Lists.getLists(function(err, lists) {
         for(let list of lists) {
             if(list.name === req.body.list) {
                 Subscribers.addSubscriber(req.body.list, req.body.address
-                                                                    , (err) => {
+                                                            , function(err) {
                     if(err)
                         return logError(err, res);
                     
@@ -75,7 +75,7 @@ module.exports.updateSubscriber = function (req, res, next) {
         return logError(message, res)
     
     Subscribers.updateSubscriber(req.body.list, req.body.address, 
-                                                  req.params.address, (err) => {
+                                          req.params.address, function(err) {
         if(err)
             return logError(err, res);
         
@@ -86,7 +86,7 @@ module.exports.updateSubscriber = function (req, res, next) {
 
 // Remove a subscriber from the database
 module.exports.removeSubscriber = function (req, res, next) {
-    Subscribers.removeSubscriber(req.params.address, (err) => {
+    Subscribers.removeSubscriber(req.params.address, function(err) {
         if(err)
             return logError(err, res);
         

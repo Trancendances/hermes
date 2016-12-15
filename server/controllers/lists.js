@@ -49,7 +49,7 @@ function alterLists(req, res, feature) {
     }
     
     // Using the method
-    alterFunction(name, (err) => {
+    alterFunction(name, function(err) {
         if(err) {
             return logError(err, res);
         }
@@ -60,7 +60,7 @@ function alterLists(req, res, feature) {
 
 // Returns an array containing all the lists registered in the database
 module.exports.getLists = function (req, res, next) {
-    Lists.getLists((err, lists) => {
+    Lists.getLists(function(err, lists) {
         if(err) {
             return logError(err, res);
         }
@@ -75,7 +75,7 @@ module.exports.getList = function (req, res, next) {
         return logError('Name missing.', res);
     }
 
-    Lists.getList(req.params.name, (err, subscribers) => {
+    Lists.getList(req.params.name, function(err, subscribers) {
         if(err) {
             return logError(err, res);
         }
@@ -98,7 +98,7 @@ module.exports.updateList = function (req, res, next) {
         return logError('Names missing.', res);
     }
     
-    Lists.updateList(req.body.name, req.params.name, (err) => {
+    Lists.updateList(req.body.name, req.params.name, function(err) {
         if(err) {
             return logError(err);
         }

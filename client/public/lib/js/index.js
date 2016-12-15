@@ -6,12 +6,12 @@ function sendMail() {
             subject: $('#subject').val(),
             content: $('#content').val()
         },
-        success: () => {
+        success: function() {
             $('#sendmail').removeClass('btn-info');
             $('#sendmail').addClass('btn-success');
             $('#sendmail').val('All sent!');
         },
-        error: () => {
+        error: function() {
             $('#sendmail').removeClass('btn-info');
             $('#sendmail').addClass('btn-danger');
             $('#sendmail').val('An error occured, sending aborted.');
@@ -19,8 +19,8 @@ function sendMail() {
     });
 }
 
-$(document).ready(() => {
-    $('#sendmail').on('click', () => {
+$(document).ready(function() {
+    $('#sendmail').on('click', function() {
         // Checking if fields are filled
         if($('#subject').val() && $('#content').val()) {
             // Changing the button style
