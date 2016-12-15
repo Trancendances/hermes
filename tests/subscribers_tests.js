@@ -23,7 +23,9 @@ describe('Subscribers', () => {
     });
     
     after((done) => {
-        server.stop(() => { done(); });
+        server.stop(() => {
+            helpers.removeAllLists(done);
+        });
     });
     
     it('Getting all subscribers', (done) => {

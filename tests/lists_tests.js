@@ -15,7 +15,9 @@ describe('Lists', () => {
     });
     
     after((done) => {
-        server.stop(() => { done(); });
+        server.stop(() => {
+            helpers.removeAllLists(done);
+        });
     });
     
     it('Getting lists', (done) => {
