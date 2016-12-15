@@ -4,7 +4,7 @@ var printit         = require('printit'),
 
 
 var log = printit({
-    prefix: "db:factory",
+    prefix: 'db:factory',
     date: true
 });
 
@@ -25,13 +25,13 @@ class ConnectionFactory {
         let settings   = conf[sgbd];
         
         switch (sgbd) {
-            case "mysql":
+            case 'mysql':
                 this.instance = new MysqlConnection(settings, sgbd);
                 return this.instance;
             default:
                 // If we don't provide a connection object for the specified
                 // SGBD, or if one hasn't been specified, we exit the programm.
-                log.error("No SGBD specified, or no driver available yet.");
+                log.error('No SGBD specified, or no driver available yet.');
                 process.exit();
         }
     }

@@ -19,12 +19,12 @@ class MysqlConnection extends Connection {
             this.connection = mysql.createConnection(this.settings);
             this.connection.connect((err) => {
                 if(err) {
-                    this.log.error("Error: " + err.code);
+                    this.log.error('Error: ' + err.code);
                     console.error(err.stack);
                     process.exit();
                 }
                 // Logging
-                this.log.info("Connected to MySQL database.");
+                this.log.info('Connected to MySQL database.');
             });
         }
     }
@@ -32,7 +32,7 @@ class MysqlConnection extends Connection {
     
     // Returns SQL formatted condition part of the query
     // conditions: The conditions object
-    // returns: String containing the "WHERE" part of the query
+    // returns: String containing the 'WHERE' part of the query
     genSQLCondition(conditions) {
         let str = ''
         
@@ -44,7 +44,7 @@ class MysqlConnection extends Connection {
             str += ' AND ';
         });
         
-        // Remove the last "AND"
+        // Remove the last 'AND'
         let length = str.length;
         str = str.substr(0, length-4);
         
@@ -93,7 +93,7 @@ class MysqlConnection extends Connection {
             query += this.connection.escape(oldData[field]) + ' AND ';
         }
         
-        // Remove the last "AND"
+        // Remove the last 'AND'
         let length = query.length;
         query = query.substr(0, length-4);
         // Execute query and pass error, if there's one, to the callback
@@ -109,7 +109,7 @@ class MysqlConnection extends Connection {
             query += this.connection.escape(conditions[field]) + ' AND ';
         }
         
-        // Remove the last "AND"
+        // Remove the last 'AND'
         let length = query.length;
         query = query.substr(0, length-4);
         // Execute query and pass error, if there's one, to the callback

@@ -1,38 +1,38 @@
 function sendMail() {
     $.ajax({
-        method: "POST",
-        url: "newsletter/send",
+        method: 'POST',
+        url: 'newsletter/send',
         data: {
-            subject: $("#subject").val(),
-            content: $("#content").val()
+            subject: $('#subject').val(),
+            content: $('#content').val()
         },
         success: () => {
-            $("#sendmail").removeClass("btn-info");
-            $("#sendmail").addClass("btn-success");
-            $("#sendmail").val("All sent!");
+            $('#sendmail').removeClass('btn-info');
+            $('#sendmail').addClass('btn-success');
+            $('#sendmail').val('All sent!');
         },
         error: () => {
-            $("#sendmail").removeClass("btn-info");
-            $("#sendmail").addClass("btn-danger");
-            $("#sendmail").val("An error occured, sending aborted.");
+            $('#sendmail').removeClass('btn-info');
+            $('#sendmail').addClass('btn-danger');
+            $('#sendmail').val('An error occured, sending aborted.');
         }
     });
 }
 
 $(document).ready(() => {
-    $("#sendmail").on("click", () => {
+    $('#sendmail').on('click', () => {
         // Checking if fields are filled
-        if($("#subject").val() && $("#content").val()) {
+        if($('#subject').val() && $('#content').val()) {
             // Changing the button style
-            $("#sendmail").removeClass("btn-primary");
-            $("#sendmail").addClass("btn-info");
-            $("#sendmail").val("Sending...");
+            $('#sendmail').removeClass('btn-primary');
+            $('#sendmail').addClass('btn-info');
+            $('#sendmail').val('Sending...');
             // Send mail
             sendMail();
         } else {
-            $("#sendmail").removeClass("btn-info");
-            $("#sendmail").addClass("btn-warning");
-            $("#sendmail").val("Please fill all the fields.");
+            $('#sendmail').removeClass('btn-info');
+            $('#sendmail').addClass('btn-warning');
+            $('#sendmail').val('Please fill all the fields.');
         }
     });
 });

@@ -2,9 +2,9 @@ var listsNumber = 0;
 
 function getLists() {
     $.ajax({
-        method: "GET",
-        url: "lists",
-        dataType: "json",
+        method: 'GET',
+        url: 'lists',
+        dataType: 'json',
         success: (data) => {
             listsNumber = data.length;
             if(data.length) {
@@ -14,8 +14,8 @@ function getLists() {
                 addListeners();
             }
             else {
-                let row = "<tr><td>No list found</td><td></td></tr>";
-                $("#lists tbody").append(row);
+                let row = '<tr><td>No list found</td><td></td></tr>';
+                $('#lists tbody').append(row);
             }
         }
         // TODO: error callback
@@ -25,28 +25,28 @@ function getLists() {
 
 function createList() {
     $.ajax({
-        method: "POST",
-        url: "lists",
+        method: 'POST',
+        url: 'lists',
         data: {
-            name: $("#name").val()
+            name: $('#name').val()
         },
         success: () => {
             if(!listsNumber) {
-                $("#lists tr")[$("#lists tr").length - 1].remove();
+                $('#lists tr')[$('#lists tr').length - 1].remove();
             }
-            $("#createlist").removeClass("btn-info");
-            $("#createlist").addClass("btn-success");
-            $("#createlist").val("List created!");
-            createRow($("#name").val());
+            $('#createlist').removeClass('btn-info');
+            $('#createlist').addClass('btn-success');
+            $('#createlist').val('List created!');
+            createRow($('#name').val());
             listsNumber++;
         },
         error: (xhr) => {
-            $("#createlist").removeClass("btn-info");
-            $("#createlist").addClass("btn-danger");
-            let val = "An error occured (";
+            $('#createlist').removeClass('btn-info');
+            $('#createlist').addClass('btn-danger');
+            let val = 'An error occured (';
             val += xhr.responseJSON.err;
-            val += "), creation aborted."
-            $("#createlist").val(val);
+            val += '), creation aborted.'
+            $('#createlist').val(val);
         }
     });
 }
@@ -54,14 +54,14 @@ function createList() {
 
 function removeList(name, row) {
     $.ajax({
-        method: "DELETE",
-        url: "lists/" + name,
+        method: 'DELETE',
+        url: 'lists/' + name,
         success: () => {
             row.remove();
             listsNumber--;
             if(!listsNumber) {
-                let row = "<tr><td>No list found</td><td></td></tr>";
-                $("#lists tbody").append(row);
+                let row = '<tr><td>No list found</td><td></td></tr>';
+                $('#lists tbody').append(row);
             }
         }
         // TODO: error callback
@@ -70,7 +70,7 @@ function removeList(name, row) {
 
 
 function addListeners() {
-    $(".fa-times").on("click", (e) => {
+    $('.fa-times').on('click', (e) => {
         let row = e.target.parentNode.parentNode;
         let name = row.children[0].innerHTML;
         removeList(name, row);
@@ -82,7 +82,7 @@ function genFaHtml(operations) {
     let fa = '';
     
     operations.forEach((operation) => {
-        fa += '<i class="fa fa-' + operation + '" style="cursor:pointer"></i>&nbsp;'
+        fa += '<i class='fa fa-' + operation + '' style='cursor:pointer'></i>&nbsp;'
     });
     return fa;
 }
@@ -90,30 +90,30 @@ function genFaHtml(operations) {
 
 function createRow(name) {
     let operations = [
-        "pencil", // Edit
-        "times"   // Delete
+        'pencil', // Edit
+        'times'   // Delete
     ];
-    let row = "<tr><td>" + name + "</td><td>" + genFaHtml(operations) + "</tr>";
-    $("#lists tbody").append(row);
+    let row = '<tr><td>' + name + '</td><td>' + genFaHtml(operations) + '</tr>';
+    $('#lists tbody').append(row);
 }
 
 
 
 $(document).ready(() => {
     getLists();
-    $("#createlist").on("click", () => {
-        if($("#name").val()) {
+    $('#createlist').on('click', () => {
+        if($('#name').val()) {
             // Changing the button style
-            $("#createlist").removeClass("btn-danger");
-            $("#createlist").removeClass("btn-primary");
-            $("#createlist").addClass("btn-info");
-            $("#createlist").val("Creating...");
+            $('#createlist').removeClass('btn-danger');
+            $('#createlist').removeClass('btn-primary');
+            $('#createlist').addClass('btn-info');
+            $('#createlist').val('Creating...');
             // Send mail
             createList();
         } else {
-            $("#createlist").removeClass("btn-info");
-            $("#createlist").addClass("btn-warning");
-            $("#createlist").val("Please fill the name.");
+            $('#createlist').removeClass('btn-info');
+            $('#createlist').addClass('btn-warning');
+            $('#createlist').val('Please fill the name.');
         }
     });
 });

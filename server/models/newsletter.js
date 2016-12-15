@@ -33,9 +33,9 @@ function standardise (settings) {
     if(settings.from)
         dst.from = settings.from;
     if(settings.userAgent)
-        dst.headers["User-Agent"] = settings.userAgent;
+        dst.headers['User-Agent'] = settings.userAgent;
     if(settings.replyTo)
-        dst.headers["Reply-To"] = settings.replyTo;
+        dst.headers['Reply-To'] = settings.replyTo;
     
     return dst;
 }
@@ -48,7 +48,7 @@ class Newsletter {
     constructor(subject) {
         this.subject    = subject;
         this.recipients = []; // Mandatory
-        this.html       = ""; // Mandatory
+        this.html       = ''; // Mandatory
     }
     
     
@@ -108,7 +108,7 @@ class Newsletter {
         }
         // Prepare mail to be sent
         return mergeFields(standardise(settings.mail), {
-            subject: this.subject ? this.subject : "Newsletter",
+            subject: this.subject ? this.subject : 'Newsletter',
             html: this.html
         });
     }

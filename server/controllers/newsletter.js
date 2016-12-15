@@ -3,7 +3,7 @@ var nmd         = require('nano-markdown'),
     Newsletter  = require('../models/newsletter');
 
 var log = printit({
-    prefix: "newsletters",
+    prefix: 'newsletters',
     date: true
 });
 
@@ -35,7 +35,7 @@ resetStatus();
 module.exports.send = function (req, res, next) {
     // Checking if all the required fields are filled
     if(!req.body.subject || !req.body.content) {
-        let message = "Subject or content missing";
+        let message = 'Subject or content missing';
         res.send(400).send({err: message});
         return log.error(message);
     }
@@ -49,8 +49,8 @@ module.exports.send = function (req, res, next) {
     // This part is temporary. It will be replaced as soon as lists' subscribers
     // are implemented.
     newsletter.setRecipients([
-        "brendan.abolivier@isen-bretagne.fr",
-        "brendan@abolivier.fr"
+        'brendan.abolivier@isen-bretagne.fr',
+        'brendan@abolivier.fr'
     ]);
 
     // Translate content from markdown

@@ -3,7 +3,7 @@ var Subscribers = require('../models/subscribers.js'),
     printit     = require('printit');
 
 var log = printit({
-    prefix: "subscribers",
+    prefix: 'subscribers',
     date: true
 });
 
@@ -13,7 +13,7 @@ var log = printit({
 // res: Express's response object
 function logError(error, res) {
     // If not an error object, make it one
-    if(typeof error === "string") {
+    if(typeof error === 'string') {
         error = new Error(error);
     }
     res.status(500).send({err: error.message});
