@@ -2,31 +2,31 @@
   "name": "Hermes",
   "version": "0.0.1",
   "contributors": [
-    {
-      "name": "Brendan Abolivier",
-      "email": "brendan@trancendances.fr"
-    }
+	{
+	  "name": "Brendan Abolivier",
+	  "email": "brendan@trancendances.fr"
+	}
   ],
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Trancendances/hermes.git"
+	"type": "git",
+	"url": "git+https://github.com/Trancendances/hermes.git"
   },
   "scripts": {
-    "start": "node --use_strict server.js",
-    "test": "NODE_ENV=test mocha --use_strict tests"
+	"start": "node --use_strict server.js",
+	"test": "NODE_ENV=test mocha --use_strict tests"
   },
   "dependencies": {
-    "americano": "0.4.5",
-    "chai": "3.5.0",
-    "mocha": "2.5.3",
-    "mysql": "2.11.1",
-    "nano-markdown": "1.2.0",
-    "nodemailer": "2.4.2",
-    "printit": "0.1.20",
-    "request-json": "0.5.6"
+	"americano": "0.4.5",
+	"chai": "3.5.0",
+	"mocha": "2.5.3",
+	"mysql": "2.11.1",
+	"nano-markdown": "1.2.0",
+	"nodemailer": "2.4.2",
+	"printit": "0.1.20",
+	"request-json": "0.5.6"
   },
   "license": {
-    "type": "AGPL-3.0",
-    "url": "https://www.gnu.org/licenses/agpl-3.0.en.html"
+	"type": "AGPL-3.0",
+	"url": "https://www.gnu.org/licenses/agpl-3.0.en.html"
   }
 }
