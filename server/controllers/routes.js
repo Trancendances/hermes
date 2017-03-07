@@ -3,7 +3,9 @@ var newsletter  = require('./newsletter'),
 	subscribers = require('./subscribers');
 
 module.exports = {
-	'newsletter/send': {
+	// Mails
+	'mail': {
+		get:	newsletter.check,
 	    post:   newsletter.send
 	},
 	
