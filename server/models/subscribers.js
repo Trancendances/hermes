@@ -1,7 +1,7 @@
 var Connection  = require('../lib/db/factory');
 
 // Setting the dataType once
-var dataType = 'Models::Subscribers';
+var dataType = 'subscribers';
 	
 // This class needs to do requests to the database, so we initialise it
 // and open the connection.
