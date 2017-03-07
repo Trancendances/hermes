@@ -1,7 +1,7 @@
 function sendMail() {
 	$.ajax({
 	    method: 'POST',
-	    url: 'newsletter/send',
+	    url: 'mail',
 	    data: {
 	        subject: $('#subject').val(),
 	        content: $('#content').val()
