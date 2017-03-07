@@ -3,7 +3,7 @@ var Subscribers = require('../models/subscribers.js'),
 	printit     = require('printit');
 
 var log = printit({
-	prefix: 'subscribers',
+	prefix: 'Controllers::Subscribers',
 	date: true
 });
 

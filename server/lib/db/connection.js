@@ -11,7 +11,7 @@ class Connection {
 	    this.settings = settings;
 	    
 	    this.log = printit({
-	        prefix: 'db:' + prefix,
+	        prefix: 'DB::' + prefix,
 	        date: true
 	    });
 	}

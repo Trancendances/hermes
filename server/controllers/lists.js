@@ -2,7 +2,7 @@ var Lists   = require('../models/lists'),
 	printit = require('printit');
 
 var log = printit({
-	prefix: 'lists',
+	prefix: 'Controllers::Lists',
 	date: true
 });
 

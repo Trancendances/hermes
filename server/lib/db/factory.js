@@ -4,7 +4,7 @@ var printit         = require('printit'),
 
 
 var log = printit({
-	prefix: 'db:factory',
+	prefix: 'DB::factory',
 	date: true
 });
 
