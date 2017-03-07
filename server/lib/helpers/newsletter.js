@@ -133,16 +133,17 @@ function genTransportOptions (recipient, subject, content) {
 	let options = {
 		to: recipient,
 		subject: subject,
-		html: content
+		html: content,
+		headers: {}
 	}
 
 	// Additional options from user-based settings
-	if(settings.from)
-		options.from = settings.from;
-	if(settings.userAgent)
-		options.headers['User-Agent'] = settings.userAgent;
-	if(settings.replyTo)
-		options.headers['Reply-To'] = settings.replyTo;
+	if(settings.mail.from)
+		options.from = settings.mail.from;
+	if(settings.mail.userAgent)
+		options.headers['User-Agent'] = settings.mail.userAgent;
+	if(settings.mail.replyTo)
+		options.headers['Reply-To'] = settings.mail.replyTo;
 
 	return options;
 }
