@@ -41,3 +41,7 @@ settings.json
 
 # Test files
 test*.js
+
+# Temporary files
+~*
+*.swp
