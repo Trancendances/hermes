@@ -105,13 +105,17 @@ function send (recipient, subject, content, sent) {
 	// Get the transport options
 	let options = genTransportOptions(recipient, subject, content);
 
+	// Send the load
 	transporter.sendMail(options, function(err) {
+		// Sending process is over, send the next e-mail
 		sent();
+		// Error handling
 		if(err) {
 			status.fails.push(recipient);
 			log.error('Failed to send to ' + recipient + ': ' + err.message);
 			console.error(err.stack);
 		} else {
+			// Debug log and status update
 			log.debug('Sent to ' + recipient);
 			status.sent++;
 		}
@@ -125,6 +129,7 @@ function send (recipient, subject, content, sent) {
 // content: String containing the e-mail's HTML content
 // returns an object to pass to nodemailer's transporter
 function genTransportOptions (recipient, subject, content) {
+	// Basic options
 	let options = {
 		to: recipient,
 		subject: subject,
