@@ -101,7 +101,10 @@ module.exports.getStatus = function() {
 function send (recipient, subject, content, sent) {
 	// Set the status to sending if not previously set
 	status.sending = true;
-	
+
+	// Get the transport options
+	let options = genTransportOptions(recipient, subject, content);
+
 	transporter.sendMail(options, function(err) {
 		sent();
 		if(err) {
@@ -113,4 +116,28 @@ function send (recipient, subject, content, sent) {
 			status.sent++;
 		}
 	});
+}
+
+
+// Generate options for nodemailer's transporter
+// recipient: String containing the recipient's e-mail (following RFC 1036)
+// subject: String containing the e-mail's subject
+// content: String containing the e-mail's HTML content
+// returns an object to pass to nodemailer's transporter
+function genTransportOptions (recipient, subject, content) {
+	let options = {
+		to: recipient,
+		subject: subject,
+		html: content
+	}
+
+	// Additional options from user-based settings
+	if(settings.from)
+		options.from = settings.from;
+	if(settings.userAgent)
+		options.headers['User-Agent'] = settings.userAgent;
+	if(settings.replyTo)
+		options.headers['Reply-To'] = settings.replyTo;
+
+	return options;
 }
