@@ -44,11 +44,11 @@ class Connection {
 	
 	// Update data from the database
 	// dataType: Type of data
+	// oldData: Data to be replaced, symbolised as a {field: value} map
 	// newData: Data to replace old data, symbolised as a 
 	//          {field: value} map
-	// oldData: Data to be replaced, symbolised as a {field: value} map
 	// next(err): Callback function
-	update(dataType, newData, oldData, next) {}
+	update(dataType, oldData, newData, next) {}
 	
 	
 	// Delete data from the database

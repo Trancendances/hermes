@@ -85,7 +85,7 @@ class MysqlConnection extends Connection {
 	}
 	
 	
-	update(table, newData, oldData, next) {
+	update(table, oldData, newData, next) {
 	    let query = 'UPDATE ' + table + ' SET ? WHERE ';
 	    
 	    for(let field in oldData) {

@@ -1,11 +1,12 @@
 const nodemailer	= require('nodemailer');
 const settings		= require('../../../settings');
+const ParamError	= require('../errors/paramerror')
 const constants		= require('./const');
 const printit		= require('printit');
 const log			= printit({
 	prefix: 'Helpers::Newsletter',
 	date: true
-})
+});
 
 // Globals used to manage e-mail sending
 var transporter = null,
@@ -30,20 +31,6 @@ module.exports.init = function () {
 };
 
 
-// If an array is passed, will check if all of its rows are strings. If anything
-// else is passed, will check if it a string. If not, throw a TypeError.
-// v: parameter to check
-module.exports.checkIfString = function (v) {
-	if(v instanceof Array) {
-		for(m of v) {
-			checkIfString(m);
-		}
-	} else if(typeof v != 'string') {
-		throw new TypeError(constants.errors.NOTSTRING);
-	}
-};
-
-
 // Prepare the newsletter to be sent
 // recipients: Array of e-mails (following RFC 1036)
 // subject: The newsletter's subject
@@ -51,19 +38,19 @@ module.exports.checkIfString = function (v) {
 module.exports.prepare = function (recipients, subject, content) {
 	// Check recipients
 	if(!recipients || !recipients.length) {
-		throw new Error(constants.errors.NORECIPIENT);
+		throw new ParamError(constants.param.mail.RECIPIENTS);
 		checkIfString(recipients);
 	}
 
 	// Check subject
 	if(!subject || !subject.length) {
-		throw new Error(constants.errors.NOSUBJECT);
+		throw new ParamError(constants.param.mail.SUBJECT);
 		checkIfString(subject);
 	}
 
 	// Check content
 	if(!content || !content.length) {
-		throw new Error(constants.errors.NOCONTENT);
+		throw new ParamError(constants.param.mail.CONTENT);
 		checkIfString(content);
 	}
 

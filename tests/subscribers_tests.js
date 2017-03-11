@@ -28,28 +28,26 @@ describe('Subscribers', function() {
 	    });
 	});
 	
-	it('Getting all subscribers', function(done) {
-	    client.get('/subscribers', function(err, res, body) {
+	it('Getting subscribers to a list', function(done) {
+	    client.get('/lists/' + LIST_NAME, function(err, res, body) {
 	        body.length.should.equal(0);
 	        done();
 	    });
 	});
 	
 	it('Adding a subscriber to a non existing list', function(done) {
-	    client.post('/subscribers', {
-	        list: FAKE_LIST_NAME,
+	    client.post('/lists/' + FAKE_LIST_NAME, {
 	        address: SUB_ADDR
 	    }, function(err, res, body) {
-	        res.statusCode.should.equal(500);
+	        res.statusCode.should.equal(404);
 	        body.should.have.property('err');
-	        body.err.should.equal('List doesn\'t exist.')
+	        body.err.should.equal('HERMES_LIST_NO_EXISTS')
 	        done();
 	    });
 	});
 	
 	it('Adding a subscriber to an existing list', function(done) {
-	    client.post('/subscribers', {
-	        list: LIST_NAME,
+	    client.post('/lists/' + LIST_NAME, {
 	        address: SUB_ADDR
 	    }, function(err, res) {
 	        res.statusCode.should.equal(200);
@@ -64,10 +62,9 @@ describe('Subscribers', function() {
 	
 	it('Updating the address of a subscriber', function(done) {
 	    let data = {
-	        list: LIST_NAME,
 	        address: NEW_SUB_ADDR
 	    };
-	    client.put('/subscribers/' + SUB_ADDR, data, function(err, res) {
+	    client.put('/lists/' + LIST_NAME + '/subscribers/' + SUB_ADDR, data, function(err, res) {
 	        res.statusCode.should.equal(200);
 	        
 	        client.get('/lists/' + LIST_NAME, function(err, res, body) {
@@ -79,9 +76,9 @@ describe('Subscribers', function() {
 	});
 	
 	it('Removing a subscriber', function(done) {
-	    client.del('/subscribers/' + NEW_SUB_ADDR, {}, function(err, res) {
+	    client.del('/lists/' + LIST_NAME + '/subscribers/' + NEW_SUB_ADDR, {}, function(err, res) {
 	        res.statusCode.should.equal(200);
-	        
+
 	        client.get('/lists/' + LIST_NAME, function(err, res, body) {
 	            body.length.should.equal(0);
 	            done();

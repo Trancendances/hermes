@@ -1,32 +1,29 @@
-var newsletter  = require('./newsletter'),
-	lists       = require('./lists'),
-	subscribers = require('./subscribers');
+const mails			= require('./mails');
+const lists			= require('./lists');
+const subscribers	= require('./subscribers');
 
 module.exports = {
 	// Mails
 	'mail': {
-		get:	newsletter.check,
-	    post:   newsletter.send
+		get:	mails.check,
+	    post:   mails.send
 	},
 	
 	// Lists
 	'lists': {
-	    get:    lists.getLists,
-	    post:   lists.addList
+	    get:    lists.get,
+	    post:   lists.add
 	},
 	'lists/:name': {
-	    get:    lists.getList,
-	    put:    lists.updateList,
-	    delete: lists.removeList
+	    get:    subscribers.get,
+	    post:   subscribers.add,
+	    put:    lists.update,
+	    delete: lists.remove
 	},
 	
 	// Subscribers
-	'subscribers': {
-	    get:    subscribers.getSubscribers,
-	    post:   subscribers.addSubscriber
-	},
-	'subscribers/:address': {
-	    put:    subscribers.updateSubscriber,
-	    delete: subscribers.removeSubscriber
+	'lists/:name/subscribers/:address': {
+	    put:    subscribers.update,
+	    delete: subscribers.remove
 	}
 };

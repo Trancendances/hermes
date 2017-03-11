@@ -1,12 +1,12 @@
-var List    = require('../server/models/lists'),
-	Subs    = require('../server/models/subscribers'),
-	Client  = require('request-json').JsonClient;
+const lists			= require('../server/lib/utils/lists');
+const subscribers	= require('../server/lib/utils/subscribers');
+const Client		= require('request-json').JsonClient;
 
 module.exports.removeAllLists = function(done) {
-	List.getLists(function(err, lists) {
-	    let removal = lists.map(function(list) {
+	lists.get(function(err, listsTab) {
+	    let removal = listsTab.map(function(list) {
 	        return new Promise(function(removed) {
-	            List.removeList(list.name, removed);
+	            lists.remove(list.name, removed);
 	        });
 	    });
 	    
